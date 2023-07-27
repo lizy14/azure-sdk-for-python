@@ -176,12 +176,13 @@ class DatastoreOperations(_ScopeDependentOperations):
     @experimental
     def mount(
         self,
-        path,
-        mount_point='/home/azureuser/mount/data',
-        mode='ro_mount',
+        path: str,
+        mount_point: str = '/home/azureuser/mount/data',
+        mode: str = 'ro_mount',
+        debug: bool = False,
         **kwargs,
     ) -> None:
-        """Mount a data store to a local path.
+        """Mount a datastore to a local path.
 
         :param path: The data store path to mount, in the form of `<name>` or `azureml://datastores/<name>`.
         :type name: str
@@ -196,4 +197,4 @@ class DatastoreOperations(_ScopeDependentOperations):
 
         from azureml.dataprep import rslex_fuse_cli
         uri = rslex_fuse_cli.build_datastore_uri(self._operation_scope._subscription_id, self._resource_group_name, self._workspace_name, path)
-        rslex_fuse_cli.call_rslex_fuse_cli(uri, mount_point, read_only)
+        rslex_fuse_cli.call_rslex_fuse_cli(uri, mount_point, read_only, debug)
